@@ -17,6 +17,7 @@
 		ACF9E23F21B07450006CCE74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF9E23D21B07450006CCE74 /* LaunchScreen.storyboard */; };
 		ACF9E24A21B07450006CCE74 /* kursv2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF9E24921B07450006CCE74 /* kursv2Tests.swift */; };
 		ACF9E25521B07450006CCE74 /* kursv2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF9E25421B07450006CCE74 /* kursv2UITests.swift */; };
+		ACFDB27521B2F31E0029F453 /* PauseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFDB27421B2F31E0029F453 /* PauseScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		ACF9E25021B07450006CCE74 /* kursv2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kursv2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF9E25421B07450006CCE74 /* kursv2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kursv2UITests.swift; sourceTree = "<group>"; };
 		ACF9E25621B07450006CCE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACFDB27421B2F31E0029F453 /* PauseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				ACF9E23221B0744D006CCE74 /* Actions.sks */,
 				ACF9E23421B0744D006CCE74 /* GameScene.swift */,
 				ACF9E23621B0744D006CCE74 /* GameViewController.swift */,
+				ACFDB27421B2F31E0029F453 /* PauseScene.swift */,
 				ACF9E23821B0744D006CCE74 /* Main.storyboard */,
 				ACF9E23B21B07450006CCE74 /* Assets.xcassets */,
 				ACF9E23D21B07450006CCE74 /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 				ACF9E23521B0744D006CCE74 /* GameScene.swift in Sources */,
 				ACF9E23721B0744D006CCE74 /* GameViewController.swift in Sources */,
 				ACF9E22F21B0744D006CCE74 /* AppDelegate.swift in Sources */,
+				ACFDB27521B2F31E0029F453 /* PauseScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

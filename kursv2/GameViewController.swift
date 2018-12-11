@@ -47,4 +47,7 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    @IBAction func pauseButtonPressed(_ sender: UIButton) {
+    }
 }
+
