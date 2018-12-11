@@ -71,7 +71,7 @@
                                     <segue destination="BV1-FR-VrT" kind="show" id="34i-Cb-ws0"/>
                                 </connections>
                             </button>
-                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zde-x7-dFf">
+                            <button hidden="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zde-x7-dFf">
                                 <rect key="frame" x="139" y="377" width="96" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <state key="normal" title="Настройки"/>
@@ -94,6 +94,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bco-FC-PPS"/>
                     </view>
+                    <connections>
+                        <outlet property="continueButton" destination="Vbl-c1-FnI" id="g6n-3e-ov1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHp-kc-gR0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

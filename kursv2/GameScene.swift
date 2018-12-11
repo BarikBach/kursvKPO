@@ -27,7 +27,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         numColumnPoint = self.size.width / CGFloat(columnDisplay)
         numRowPoint = self.size.height / CGFloat(rowDisplay)
-        print(allNumPress)
+        
         if isStatistic {
             
             initializationStatstic()
@@ -42,6 +42,10 @@ class GameScene: SKScene {
         }
     }
     func initializationStart() {
+        //Обнуляем либо создаем статистику заново
+        if !arrayNumPress.isEmpty {
+            arrayNumPress.removeAll()
+            }
         for _ in 0...columnDisplay {
             var columnArray = Array<NumPress>()
             for _ in 0...rowDisplay
@@ -61,23 +65,29 @@ class GameScene: SKScene {
         ScoreLabel?.zPosition = 1
         ScoreLabel?.position = CGPoint.init(x: 0.0, y: self.size.height/2 - (ScoreLabel?.calculateAccumulatedFrame().height)! - 15)
         self.addChild(ScoreLabel!)
+        for i in 0...columnDisplay{
+            for j in 0...rowDisplay{
+                let obj = SKShapeNode.init(rect: CGRect.init(x: CGFloat(i - columnDisplay/2) * numColumnPoint, y: CGFloat(j - rowDisplay/2) * numRowPoint, width: numColumnPoint, height: numRowPoint))
+                obj.fillColor = UIColor.darkGray
+                obj.zPosition = -0.5
+                self.addChild(obj)
+                
+                
+            }
+        }
     }
     func initializationStatstic(){
-        print("Static")
         if !(numRowPoint == 0.0 || numColumnPoint == 0.0){
-            print("Static1")
             if arrayNumPress.count == 0{
                 return
             }
-            for i in 0...columnDisplay{
-                for j in 0...rowDisplay{
-                    //                    if (i == 8 || i == 9) && j == 9 {
-                    //                        continue
-                    //                    }
-                    let obj = SKShapeNode.init(rect: CGRect.init(x: CGFloat(i - columnDisplay/2) * numColumnPoint, y: CGFloat(j - rowDisplay/2) * numRowPoint, width: numColumnPoint, height: numRowPoint))
+            for i in 0..<columnDisplay{
+                for j in 0..<rowDisplay{
+                    let obj = SKShapeNode.init(rect: CGRect.init(x: CGFloat(i - columnDisplay/2) * numColumnPoint,
+                                                                 y: CGFloat(rowDisplay - 1 - j - rowDisplay/2) * numRowPoint, width: numColumnPoint, height: numRowPoint))
                     obj.fillColor = UIColor.darkGray
                     obj.zPosition = 0.5
-                    let stringLabel = String(arrayNumPress[i][j].press == 0 ? 0: Int(round(Double(arrayNumPress[i][j].hit)/Double(arrayNumPress[i][j].press) * 100))) + "% \n" +  String(arrayNumPress[i][j].hit+arrayNumPress[i][j].press)
+                    let stringLabel = String(arrayNumPress[i][j].press == 0 ? 0: Int(round(Double(arrayNumPress[i][j].hit)/Double(arrayNumPress[i][j].press) * 100))) + "% \n" +  String(arrayNumPress[i][j].press)
                     let myLabel = SKLabelNode.init(text: stringLabel)
                     myLabel.fontColor = UIColor.green
                     myLabel.numberOfLines = 2
@@ -86,6 +96,7 @@ class GameScene: SKScene {
                     myLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
                     self.addChild(obj)
                     self.addChild(myLabel)
+                    print("\(i) \(j) \(arrayNumPress[i][j].hit) \(arrayNumPress[i][j].press)")
                     
                 }
             }
@@ -95,37 +106,93 @@ class GameScene: SKScene {
     func randColor() -> SKColor {
         return SKColor.init(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: CGFloat.random(in: 0...1))
     }
+    func minPressInSector() -> Int {
+        var min = Int.max
+        for i in 0..<arrayNumPress.count {
+            for j in 0..<arrayNumPress[i].count{
+                min = arrayNumPress[i][j].press < min ? arrayNumPress[i][j].press : min
+            }
+        }
+        return min
+    }
     func createObjects() -> SKShapeNode{
-        let radius = CGFloat.random(in: 10...50)
+        let radius = CGFloat.random(in: 40...50)
         let object = SKShapeNode.init(circleOfRadius: radius)
         object.fillColor = randColor()
         object.zPosition = 1.0
         let noty = ScoreLabel?.calculateAccumulatedFrame().height ?? 0
-        let x = CGFloat.random(in: -self.size.width/2 + radius ... self.size.width/2 - radius)
-        let y = CGFloat.random(in: -self.size.height/2 + radius ... self.size.height/2 - radius - noty)
-        object.position = CGPoint(x: x, y: y)
+        var (sectorX, sectorY) = (0, 0)
+        let minIsSector = minPressInSector()
+        print("min \(minIsSector)")
+        repeat{
+            let x = CGFloat.random(in: -self.size.width/2 + radius ... self.size.width/2 - radius)
+            let y = CGFloat.random(in: -self.size.height/2 + radius ... self.size.height/2 - radius - noty)
+            object.position = CGPoint(x: x, y: y)
+            (sectorX, sectorY) = defineSector(object: object)
+        } while arrayNumPress[sectorX][sectorY].press != minIsSector
+        
         return object
     }
-    
+    func defineSector(object:SKShapeNode?) -> (Int, Int) { //Переписать
+        var sectorX = 0
+        var sectorY = 0
+        for i in 1...columnDisplay{
+            if (((object?.frame.midX)! < (CGFloat(i-columnDisplay/2) * numColumnPoint)) &&
+                ((object?.frame.midX)! > (CGFloat(i-1 - columnDisplay/2) * numColumnPoint))) ||
+                (((object?.frame.midX)! > (CGFloat(i-columnDisplay/2) * numColumnPoint)) &&
+                 ((object?.frame.midX)! < (CGFloat(i-1 - columnDisplay/2) * numColumnPoint)))
+            {
+                sectorX = i-1
+                break
+            }
+        }
+        for i in 1...rowDisplay{
+            if (((object?.frame.midY)! < (CGFloat(i - rowDisplay/2) * numRowPoint)) &&
+                ((object?.frame.midY)! > (CGFloat(i-1 - rowDisplay/2) * numRowPoint))) ||
+                (((object?.frame.midY)! > (CGFloat(i-rowDisplay/2) * numRowPoint)) &&
+                    ((object?.frame.midY)! < (CGFloat(i-1 - rowDisplay/2) * numRowPoint)))
+            {
+                sectorY = rowDisplay - i
+                break
+            }
+        }
+        return (sectorX, sectorY)
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("10")
         if  self.object != nil  {
             let locationTouch = (touches.first?.location(in: self))!
+            //Координаты с середины, следовательно отсчитываем координаты от середины
+            let (sectorX, sectorY) = defineSector(object: object)
             if isInside(a: locationTouch, b: self.object!) {
                 allNumPress.hit += 1
-                print(columnDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numColumnPoint)), rowDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numRowPoint)))
-                arrayNumPress[columnDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numColumnPoint))][rowDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numRowPoint))].hit += 1
+                arrayNumPress[sectorX][sectorY].hit += 1
             }
             allNumPress.press += 1
-            arrayNumPress[columnDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numColumnPoint))][rowDisplay/2 + Int(round((object?.calculateAccumulatedFrame().width)!/numRowPoint))].press += 1
+            arrayNumPress[sectorX][sectorY].press += 1
             object?.removeFromParent()
             object = createObjects()
             self.addChild(object!)
             if ScoreLabel != nil{
-                ScoreLabel!.text="Procent: \(allNumPress.press == 0 ? 0 : Int(round(Double(allNumPress.hit)/Double(allNumPress.press) * 100))) %"
+                ScoreLabel!.text="Procent: \(allNumPress.press == 0 ? 0 : Int(round(Double(allNumPress.hit)/Double(allNumPress.press) * 100))) %  \(minPressInSector())"
             }
         }
         
         
+    }
+    func roundX(a:CGFloat) -> Int {
+        if a < 0{
+            return lroundf( Float(a-0.5) )
+        } else{
+            return lroundf(Float(a))
+        }
+    }
+    func roundY(a:CGFloat) -> Int {
+        if a < 0{
+            return lroundf( Float(a) )
+        } else{
+            return lroundf(Float(a+0.5))
+        }
     }
     func isInside(a: CGPoint, b: SKShapeNode) -> Bool {
         if (b.position.x - b.calculateAccumulatedFrame().width)...(b.position.x + b.calculateAccumulatedFrame().width)  ~= a.x {
