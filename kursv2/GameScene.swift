@@ -45,10 +45,10 @@ class GameScene: SKScene {
         //Обнуляем либо создаем статистику заново
         if !arrayNumPress.isEmpty {
             arrayNumPress.removeAll()
-            }
-        for _ in 0...columnDisplay {
+        }
+        for _ in 0..<columnDisplay {
             var columnArray = Array<NumPress>()
-            for _ in 0...rowDisplay
+            for _ in 0..<rowDisplay
             {
                 columnArray.append(NumPress.init())
             }
@@ -107,13 +107,12 @@ class GameScene: SKScene {
         return SKColor.init(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: CGFloat.random(in: 0...1))
     }
     func minPressInSector() -> Int {
-        var min = Int.max
-        for i in 0..<arrayNumPress.count {
-            for j in 0..<arrayNumPress[i].count{
-                min = arrayNumPress[i][j].press < min ? arrayNumPress[i][j].press : min
-            }
-        }
-        return min
+        let min = arrayNumPress.min(by: {(a, b) -> Bool in
+            return a.min(by: {(i,k) -> Bool in return i.press < k.press})!.press <
+                   b.min(by: {(i,k) -> Bool in return i.press < k.press})!.press
+        })?.min(by: {(a,b) -> Bool in return a.press < b.press})!
+        
+        return (min?.press)!
     }
     func createObjects() -> SKShapeNode{
         let radius = CGFloat.random(in: 40...50)
@@ -124,13 +123,17 @@ class GameScene: SKScene {
         var (sectorX, sectorY) = (0, 0)
         let minIsSector = minPressInSector()
         print("min \(minIsSector)")
-        repeat{
+        for _ in 0...1000 {
             let x = CGFloat.random(in: -self.size.width/2 + radius ... self.size.width/2 - radius)
             let y = CGFloat.random(in: -self.size.height/2 + radius ... self.size.height/2 - radius - noty)
             object.position = CGPoint(x: x, y: y)
             (sectorX, sectorY) = defineSector(object: object)
-        } while arrayNumPress[sectorX][sectorY].press != minIsSector
-        
+            if arrayNumPress[sectorX][sectorY].press == minIsSector{
+                print("OK")
+                return object
+            }
+        }
+        //Testing
         return object
     }
     func defineSector(object:SKShapeNode?) -> (Int, Int) { //Переписать
@@ -140,7 +143,7 @@ class GameScene: SKScene {
             if (((object?.frame.midX)! < (CGFloat(i-columnDisplay/2) * numColumnPoint)) &&
                 ((object?.frame.midX)! > (CGFloat(i-1 - columnDisplay/2) * numColumnPoint))) ||
                 (((object?.frame.midX)! > (CGFloat(i-columnDisplay/2) * numColumnPoint)) &&
-                 ((object?.frame.midX)! < (CGFloat(i-1 - columnDisplay/2) * numColumnPoint)))
+                    ((object?.frame.midX)! < (CGFloat(i-1 - columnDisplay/2) * numColumnPoint)))
             {
                 sectorX = i-1
                 break
