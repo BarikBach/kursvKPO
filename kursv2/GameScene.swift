@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import MessageUI
 var isStatistic :Bool = false
 var isStart :Bool = true
 struct NumPress {
@@ -17,10 +18,12 @@ struct NumPress {
 var arrayNumPress = Array<Array<NumPress>>()
 var allNumPress:NumPress = NumPress.init()
 class GameScene: SKScene {
+    
+
     private var object : SKShapeNode?
     private var spinnyNode : SKShapeNode?
-    let rowDisplay = 8
-    let columnDisplay = 8
+    let rowDisplay = 6
+    let columnDisplay = 6
     var numColumnPoint : CGFloat = 0
     var numRowPoint :CGFloat = 0
     private var ScoreLabel :SKLabelNode?
@@ -71,8 +74,6 @@ class GameScene: SKScene {
                 obj.fillColor = UIColor.darkGray
                 obj.zPosition = -0.5
                 self.addChild(obj)
-                
-                
             }
         }
     }
@@ -96,10 +97,15 @@ class GameScene: SKScene {
                     myLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
                     self.addChild(obj)
                     self.addChild(myLabel)
-                    print("\(i) \(j) \(arrayNumPress[i][j].hit) \(arrayNumPress[i][j].press)")
-                    
                 }
             }
+            for k1 in 0..<columnDisplay{
+                for k2 in 0..<rowDisplay{
+                    print(arrayNumPress[k1][k2].press == 0 ? 0: Int(round(Double(arrayNumPress[k1][k2].hit)/Double(arrayNumPress[k1][k2].press) * 100)), terminator: " ")
+                }
+                print()
+            }
+            print("________________________")
         }
         
     }
@@ -122,14 +128,12 @@ class GameScene: SKScene {
         let noty = ScoreLabel?.calculateAccumulatedFrame().height ?? 0
         var (sectorX, sectorY) = (0, 0)
         let minIsSector = minPressInSector()
-        print("min \(minIsSector)")
-        for _ in 0...1000 {
+        for _ in 0...100 {
             let x = CGFloat.random(in: -self.size.width/2 + radius ... self.size.width/2 - radius)
             let y = CGFloat.random(in: -self.size.height/2 + radius ... self.size.height/2 - radius - noty)
             object.position = CGPoint(x: x, y: y)
             (sectorX, sectorY) = defineSector(object: object)
             if arrayNumPress[sectorX][sectorY].press == minIsSector{
-                print("OK")
                 return object
             }
         }
@@ -162,7 +166,6 @@ class GameScene: SKScene {
         return (sectorX, sectorY)
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("10")
         if  self.object != nil  {
             let locationTouch = (touches.first?.location(in: self))!
             //Координаты с середины, следовательно отсчитываем координаты от середины
@@ -206,8 +209,6 @@ class GameScene: SKScene {
         
         return false
     }
-    
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "GameScene.touchesBegan(_:with:):GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ColumnDisplay">
+            </PersistentString>
+            <PersistentString
+               value = "object?.frame.midY">
+            </PersistentString>
+            <PersistentString
+               value = "numColumnPoint">
+            </PersistentString>
+            <PersistentString
+               value = "object?.calculateAccumulatedFrame().width">
+            </PersistentString>
+            <PersistentString
+               value = "object?.frame.midX">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.initializationStatic():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "numRowPoint">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StatisticSceneController.viewDidLoad():StatisticSceneController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GameScene.createObjects():GameScene.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "arrayNumPress">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
