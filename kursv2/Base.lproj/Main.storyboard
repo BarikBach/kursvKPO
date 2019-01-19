@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tya-vQ-sZF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,6 @@
                                 <state key="normal" image="PauseButton"/>
                                 <connections>
                                     <action selector="pauseButtonPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Zxk-6m-ADo"/>
-                                    <segue destination="Tya-vQ-sZF" kind="modal" id="0FO-hW-kqw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -36,103 +35,8 @@
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="33.733133433283363"/>
         </scene>
-        <!--Pause Scene-->
-        <scene sceneID="BfD-NR-Wvf">
-            <objects>
-                <viewController id="Tya-vQ-sZF" customClass="PauseScene" customModule="kursv2" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gdt-BD-gBD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6X-63-UOP">
-                                <rect key="frame" x="139" y="256" width="96" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Начать"/>
-                                <connections>
-                                    <action selector="Start:" destination="Tya-vQ-sZF" eventType="touchUpInside" id="MUf-Wa-K76"/>
-                                    <segue destination="BV1-FR-VrT" kind="modal" id="uhs-yg-6SC"/>
-                                </connections>
-                            </button>
-                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-c1-FnI">
-                                <rect key="frame" x="139" y="192" width="96" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Продолжить"/>
-                                <connections>
-                                    <action selector="continueButtonPressed:" destination="Tya-vQ-sZF" eventType="touchUpInside" id="Bwl-8S-TXh"/>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="z2g-Tg-eWY"/>
-                                </connections>
-                            </button>
-                            <button contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLi-0K-S9F">
-                                <rect key="frame" x="139" y="317" width="96" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Статистика"/>
-                                <connections>
-                                    <action selector="PressStati:" destination="Tya-vQ-sZF" eventType="touchUpInside" id="k75-PE-VKI"/>
-                                    <segue destination="BV1-FR-VrT" kind="show" id="34i-Cb-ws0"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zde-x7-dFf">
-                                <rect key="frame" x="139" y="377" width="96" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Настройки"/>
-                                <connections>
-                                    <segue destination="VmA-ea-IOV" kind="show" id="yTT-LP-vCU"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.68894749365482233" green="0.37995646331292415" blue="0.66907071075156566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="e6X-63-UOP" firstAttribute="leading" secondItem="TLi-0K-S9F" secondAttribute="leading" id="2mR-UX-Fam"/>
-                            <constraint firstItem="Zde-x7-dFf" firstAttribute="leading" secondItem="bco-FC-PPS" secondAttribute="leading" constant="146" id="2ug-a8-5u1"/>
-                            <constraint firstItem="Vbl-c1-FnI" firstAttribute="top" secondItem="bco-FC-PPS" secondAttribute="top" constant="172" id="Ax4-Rb-0nR"/>
-                            <constraint firstItem="e6X-63-UOP" firstAttribute="top" secondItem="bco-FC-PPS" secondAttribute="top" constant="237" id="DSr-61-8zL"/>
-                            <constraint firstItem="Zde-x7-dFf" firstAttribute="centerX" secondItem="e6X-63-UOP" secondAttribute="centerX" id="Jy0-sI-qEa"/>
-                            <constraint firstItem="Zde-x7-dFf" firstAttribute="centerX" secondItem="TLi-0K-S9F" secondAttribute="centerX" id="Y0H-TI-IeC"/>
-                            <constraint firstItem="bco-FC-PPS" firstAttribute="bottom" secondItem="Zde-x7-dFf" secondAttribute="bottom" constant="258" id="kNl-48-HOu"/>
-                            <constraint firstItem="Zde-x7-dFf" firstAttribute="top" secondItem="TLi-0K-S9F" secondAttribute="bottom" constant="31" id="l52-wq-dFI"/>
-                            <constraint firstItem="Vbl-c1-FnI" firstAttribute="centerX" secondItem="bco-FC-PPS" secondAttribute="centerX" id="mVG-dt-UR3"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="bco-FC-PPS"/>
-                    </view>
-                    <connections>
-                        <outlet property="continueButton" destination="Vbl-c1-FnI" id="g6n-3e-ov1"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HHp-kc-gR0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-706.39999999999998" y="33.733133433283363"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="QuN-mX-VAB">
-            <objects>
-                <viewController id="VmA-ea-IOV" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="NcG-R4-IJT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrp-QR-Qcr">
-                                <rect key="frame" x="165" y="596" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Назад"/>
-                                <connections>
-                                    <segue destination="Tya-vQ-sZF" kind="show" id="4A4-vo-TKP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="7rz-J6-G6g"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K0b-SW-lPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="54" y="752"/>
-        </scene>
     </scenes>
     <resources>
         <image name="PauseButton" width="512" height="512"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="0FO-hW-kqw"/>
-        <segue reference="uhs-yg-6SC"/>
-    </inferredMetricsTieBreakers>
 </document>
